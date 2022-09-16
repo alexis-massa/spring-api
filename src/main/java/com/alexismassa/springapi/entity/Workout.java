@@ -3,6 +3,7 @@ package com.alexismassa.springapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,5 +20,13 @@ public class Workout {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany
+    @JoinTable(
+            name = "workout_serie",
+            joinColumns = @JoinColumn(name = "id_serie"),
+            inverseJoinColumns = @JoinColumn(name = "id_workout")
+    )
+    private List<Serie> series;
 
 }
