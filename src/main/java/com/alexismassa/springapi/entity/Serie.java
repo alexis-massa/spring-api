@@ -1,9 +1,9 @@
 package com.alexismassa.springapi.entity;
 
+import com.alexismassa.springapi.entity.key.SeriePK;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Time;
 
 @Getter
 @Setter
@@ -11,27 +11,29 @@ import java.sql.Time;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "series")
+@IdClass(SeriePK.class)
+@Table(name = "serie")
 public class Serie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_exercise;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_exercise", referencedColumnName = "id")
-    private Exercise exercise;
+    @Id
+    private Long id_workout;
 
-    @Column(name = "timed")
-    private boolean timed;
+    @Column(name = "position")
+    private Integer position;
 
     @Column(name = "repetitions")
     private Integer repetitions;
 
     @Column(name = "time")
-    private Time time;
+    private Integer time;
 
     @Column(name = "rest")
-    private Time rest;
+    private Integer rest;
+
+    @Column(name = "series")
+    private Integer series;
 
 }

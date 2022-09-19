@@ -1,8 +1,10 @@
 package com.alexismassa.springapi.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,15 +20,7 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
-    @OneToMany
-    @JoinTable(
-            name = "workout_serie",
-            joinColumns = @JoinColumn(name = "id_serie"),
-            inverseJoinColumns = @JoinColumn(name = "id_workout")
-    )
-    private List<Serie> series;
+    @Column(name = "title", nullable = false)
+    private String title;
 
 }

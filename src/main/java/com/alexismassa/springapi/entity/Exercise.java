@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "exercises")
+@Table(name = "exercise")
 public class Exercise {
 
     @Id
@@ -20,6 +20,7 @@ public class Exercise {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description", nullable = true)
+    @Column(name = "description")
     private String description;
+
 }
