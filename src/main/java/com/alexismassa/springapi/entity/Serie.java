@@ -2,6 +2,7 @@ package com.alexismassa.springapi.entity;
 
 import com.alexismassa.springapi.entity.key.SeriePK;
 import lombok.*;
+import org.aspectj.weaver.loadtime.Options;
 
 import javax.persistence.*;
 
@@ -11,15 +12,21 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@IdClass(SeriePK.class)
 @Table(name = "serie")
+@AssociationOverrides({
+        @AssociationOverride(name = "seriePK.exercise", joinColumns = @JoinColumn(name = "id_exercise")),
+        @AssociationOverride(name = "seriePK.workout", joinColumns = @JoinColumn(name = "id_workout"))
+})
 public class Serie {
 
-    @Id
-    private Long id_exercise;
+    @EmbeddedId
+    private SeriePK seriePK;
 
-    @Id
-    private Long id_workout;
+    @Transient
+    private Exercise exercise;
+
+    @Transient
+    private Workout workout;
 
     @Column(name = "position")
     private Integer position;

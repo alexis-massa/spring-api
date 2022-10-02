@@ -1,34 +1,30 @@
 package com.alexismassa.springapi.entity.key;
 
+import com.alexismassa.springapi.entity.Exercise;
+import com.alexismassa.springapi.entity.Workout;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
-import java.util.Objects;
 
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Embeddable
 public class SeriePK implements Serializable {
-    private Long id_exercise;
-    private Long id_workout;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Exercise exercise;
 
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        SeriePK that = (SeriePK) o;
-        return Objects.equals(id_exercise, that.id_exercise) &&
-                Objects.equals(id_workout, that.id_workout);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id_exercise, id_workout);
-    }
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Workout workout;
 
 }

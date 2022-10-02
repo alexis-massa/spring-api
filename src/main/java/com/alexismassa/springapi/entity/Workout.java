@@ -1,10 +1,9 @@
 package com.alexismassa.springapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,9 +17,12 @@ public class Workout {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_workout;
 
     @Column(name = "title", nullable = false)
     private String title;
+
+    @OneToMany(mappedBy = "seriePK.workout", cascade = CascadeType.ALL)
+    private List<Serie> series;
 
 }
